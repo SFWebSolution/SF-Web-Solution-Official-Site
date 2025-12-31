@@ -34,6 +34,8 @@ body, html {
   border: 1px solid rgba(255,255,255,0.2);
   padding: 20px;
   margin: 20px auto;
+  width: 90%;
+  max-width: 1200px;
   transition: all 0.3s ease-in-out;
 }
 
@@ -45,18 +47,33 @@ body, html {
 /* ================= HEADER ================= */
 .glass-header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column; /* logo on top */
   align-items: center;
-  max-width: 1200px;
+  gap: 10px; /* space between logo and nav */
 }
+
+/* Nav links horizontally below logo, auto shrink */
+.glass-header nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* space between links */
+  flex-wrap: nowrap; /* prevent wrapping */
+  width: 100%;
+}
+
 .glass-header nav a {
+  flex: 1; /* shrink links evenly */
+  text-align: center;
   color: white;
   text-decoration: none;
-  margin: 0 15px;
   font-weight: bold;
+  padding: 5px 10px;
+  font-size: clamp(0.7rem, 2vw, 1rem); /* shrink automatically on small screens */
   transition: all 0.3s;
 }
-.glass-header nav a:hover, .glass-header nav a.active {
+
+.glass-header nav a:hover,
+.glass-header nav a.active {
   color: #00ffe6;
   text-shadow: 0 0 10px #00ffe6, 0 0 20px #00ffe6;
 }
@@ -74,11 +91,17 @@ body, html {
 }
 
 /* ================= MAIN & CARDS ================= */
-.glass-main { max-width: 1200px; text-align: center; }
-.glass-card { margin: 20px; padding: 25px; transition: 0.3s; }
+.glass-main { text-align: center; }
+
+.glass-card { 
+  margin: 15px 0; 
+  padding: 20px; 
+  transition: 0.3s; 
+  width: 100%;
+}
 
 button {
-  padding: 10px 25px;
+  padding: 10px 20px;
   margin-top: 15px;
   border: none;
   border-radius: 10px;
@@ -86,6 +109,8 @@ button {
   color: white;
   cursor: pointer;
   transition: 0.3s;
+  width: 90%;
+  max-width: 250px;
 }
 button:hover {
   background: rgba(0,255,255,0.6);
@@ -99,16 +124,17 @@ button:hover {
   gap: 15px;
 }
 .project-card img {
-  width: 200px;
-  height: 150px;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
   border-radius: 10px;
   object-fit: cover;
 }
 
 .contact-links a {
   display: inline-block;
-  margin: 10px;
-  padding: 10px 20px;
+  margin: 10px 5px;
+  padding: 10px 15px;
   background: rgba(0,255,255,0.3);
   color: white;
   border-radius: 10px;
@@ -122,6 +148,7 @@ button:hover {
 
 /* ================= FOOTER ================= */
 .glass-footer { text-align: center; color: white; }
+
 .service-cards {
   display: flex;
   flex-wrap: wrap;
@@ -130,9 +157,10 @@ button:hover {
   margin-top: 20px;
 }
 .service-card {
-  width: 250px;
+  flex: 1 1 250px;
   padding: 20px;
   transition: 0.3s;
+  min-width: 200px;
 }
 .service-card:hover {
   transform: scale(1.05);
@@ -148,3 +176,16 @@ button:hover {
   font-size: 0.95rem;
 }
 
+/* ================= RESPONSIVE MEDIA QUERIES ================= */
+@media screen and (max-width: 768px) {
+  .neon-text { font-size: 1.5rem; }
+  button { width: 100%; }
+  .project-card img { max-width: 100%; height: auto; }
+}
+
+@media screen and (max-width: 480px) {
+  .neon-text { font-size: 1.2rem; }
+  .glass-card { padding: 15px; }
+  .contact-links a { padding: 8px 12px; font-size: 0.9rem; }
+  .service-card { padding: 15px; }
+}
